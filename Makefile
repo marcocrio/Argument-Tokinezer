@@ -1,4 +1,3 @@
 compile: 
-	#!/bin/bash
-	gcc main.c argtok.c -o argtok
+	gcc -g main.c .src/argtok.c -o argtok
 	./argtok

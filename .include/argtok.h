@@ -9,7 +9,9 @@
 #define ARGTOK_FILE
 
 
-char ** argtok(char *);
+char** argtok(char*);
 int validation(char*);
+char** read(char*);
+
 
 #endif
