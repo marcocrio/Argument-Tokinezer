@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "argtok.h"
+#include "../argtok.h"
 
 
 char ** argtok(char * token){
