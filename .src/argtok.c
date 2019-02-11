@@ -112,14 +112,15 @@ char ** read(char * token){
 
     char c= 'a';
     int i=0;
-    while(c!= '\0'){
+    do{
         c = token[i];
         if(c=='\n'){printf("New Line\n");}
-        else if(c=='\0'){printf("Null Character\n");}
+        if(c=='\0'){printf("End of String\n");}
         else {printf("%c\n",c);}
         i++;
         c = token[i];
-    };
+    }
+    while(c!= '\n');
 
     return NULL;
 
