@@ -15,12 +15,8 @@ void main (){
     //then memory is allocated for the buffer   
     scanf("%m[^\n]", &tokenlist);
 
-    printf("%s",tokenlist);
-
-    read(tokenlist);
-
     //token generation
-    //tokenvector = argtok(tokenlist);
+    tokenvector = argtok(tokenlist);
 
     //Buffer deallocation to avoid leak.
     free(tokenlist);

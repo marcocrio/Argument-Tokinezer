@@ -13,49 +13,51 @@ char ** argtok(char * tokenlist){
     Token* tokcursor = vectorinit();
     Token* head = tokcursor;
 
-    tokcursor->token = charcursor;
+    tokcursor->token = &charcursor;
 
     //count number and lenght of tokens.
-    while(tokenlist[i]!= '\n'){
+    while(tokenlist[i]!= '\0'){
         charcursor->tokenchar = tokenlist[i];
-        charcursor->index = i;
+        charcursor->index = tokensize;
         charcursor->next = tokeninit();
         charcursor = charcursor->next;
         tokensize++;
+        i++;
 
-        if(tokenlist[i+1]==' '){
-            
+        if(tokenlist[i]==' ' || tokenlist[i]=='\0'){
             charcursor->tokenchar = '\0';
-            charcursor->index = i;
-            charcursor->next = NULL;
-            tokensize++;
+            charcursor->index = tokensize;
 
-
-            tokcursor->index =tokencnt;
-            tokcursor->tokensize=tokensize;
-            tokcursor->next = vectorinit();
-            tokcursor = tokcursor->next;
-            tokcursor->token = charcursor;
-
+            //initialize next 
+            if(tokenlist[i]!='\0'){
+                tokcursor->index =tokencnt;
+                tokcursor->tokensize = tokensize;
+                tokcursor->next = vectorinit();
+                charcursor=tokeninit();
+                tokcursor = tokcursor->next;
+                tokcursor->token = &charcursor;
+                tokencnt++;
+            }
             tokensize=0;
-            tokencnt++;
-            i++;
 
         }
-        i++;
     }
 
-    charcursor= head->token;
+
+
+    charcursor= *head->token;
     char c;
+    char* tmp=(char*)malloc(i*sizeof(char));
     i=0;
-    char* tmp=(char*)malloc(head->tokensize*sizeof(char));
     while(charcursor->tokenchar!='\0'){  
         c= charcursor->tokenchar;
-        printf("%c",c);  
+       // printf("%c",c);  
         tmp[i]= charcursor->tokenchar;
         charcursor= charcursor->next;
         i++;
     }
+
+    
 
     printf("%s\n",tmp);
 
@@ -76,6 +78,8 @@ Tokenspll* tokeninit(){
 //Allocates new Token Vector link.
 Token* vectorinit(){
     Token* new = (Token*)malloc(sizeof(Token));
+    new->tokensize=0;
+    new->index=0;
     new->next=NULL;
     return new;
 }
@@ -120,7 +124,7 @@ char ** read(char * token){
         i++;
         c = token[i];
     }
-    while(c!= '\n');
+    while(c!= '\0');
 
     return NULL;
 

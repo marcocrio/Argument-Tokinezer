@@ -2,17 +2,20 @@
 #define ARGTOK_FILE
 
 //data structure "token" to easly deallocate memory
-typedef struct {
+typedef struct Tokenspll Tokenspll;
+typedef struct Token Token;
+
+struct Tokenspll {
   char tokenchar;
   int index;
   struct Tokenspll* next;
-} Tokenspll;
+};
 
-typedef struct {
-  Tokenspll* token;
+struct Token {
+  Tokenspll** token;
   int index, tokensize;
   struct Token* next;
-} Token;
+};
 
 
 char** argtok(char*);
