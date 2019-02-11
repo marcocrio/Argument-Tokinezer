@@ -8,17 +8,18 @@ void main (){
 
     printf("Provide a list of tokens separated by an space:\n");
     
+
+    char* tokenlist;
+    char** tokenvector;
     //scanf reads the buffer until it finds a new line characte '\n'.
     //then memory is allocated for the buffer   
-    char *tokenlist=NULL;
     scanf("%m[^\n]", &tokenlist);
 
-    //input validation
-    validation(tokenlist);
-    
+
+    read(tokenlist);
+
     //token generation
-    char ** tokens=NULL;
-    tokens = read(tokenlist);
+    //tokenvector = argtok(tokenlist);
 
     //Buffer deallocation to avoid leak.
     free(tokenlist);

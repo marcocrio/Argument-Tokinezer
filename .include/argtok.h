@@ -1,17 +1,27 @@
-/*  --Author: Marco A Ramirez
-    --Version: 0.1
-    --Description: "This library is intended to create an argument tokenizer function
-    --which has white space as delimeter. The argtok() function takes a string
-    --and breaks it up creating a "null terminated" vector of pointers to newly 
-    --allocated strings contining the tokens provided as by the user."
-*/
 #ifndef ARGTOK_FILE
 #define ARGTOK_FILE
+
+//data structure "token" to easly deallocate memory
+typedef struct {
+  char tokenchar;
+  int index;
+  struct Tokenspll* next;
+} Tokenspll;
+
+typedef struct {
+  Tokenspll* token;
+  int index, tokensize;
+  struct Token* next;
+} Token;
 
 
 char** argtok(char*);
 int validation(char*);
 char** read(char*);
+
+Tokenspll* tokeninit();//Initializes a new Token Character
+Token* vectorinit();//Initializes a new Token Vector entry
+void freemem(Token* t); // dealocates instance of data structure Token
 
 
 #endif
