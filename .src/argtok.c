@@ -6,62 +6,48 @@
 char ** argtok(char * tokenlist){
     validation(tokenlist); //input validation
 
-    char** tokenvector;
-    int tokencnt=0,i=0, tokensize=0;
+    char** tokenvector=(char**)malloc(sizeof(char));
+    char* temptoken;
+    int tokenlenght=0,tokencnt=0,i=0;
 
-    Tokenspll* charcursor = tokeninit();
-    Token* tokcursor = vectorinit();
-    Token* head = tokcursor;
+    tokenvector[tokencnt]= (char*)malloc(sizeof(char));
+    temptoken = tokenvector[tokencnt];
 
-    tokcursor->token = &charcursor;
-
-    //count number and lenght of tokens.
-    while(tokenlist[i]!= '\0'){
-        charcursor->tokenchar = tokenlist[i];
-        charcursor->index = tokensize;
-        charcursor->next = tokeninit();
-        charcursor = charcursor->next;
-        tokensize++;
-        i++;
-
+    while(tokenlist[i]!='\0'){
+        
         if(tokenlist[i]==' ' || tokenlist[i]=='\0'){
-            charcursor->tokenchar = '\0';
-            charcursor->index = tokensize;
+            temptoken = (char*)realloc(temptoken, (tokenlenght+1)*sizeof(char));
+            temptoken[tokenlenght]='\0';
+            tokenlenght=0;
 
-            //initialize next 
-            if(tokenlist[i]!='\0'){
-                tokcursor->index =tokencnt;
-                tokcursor->tokensize = tokensize;
-                tokcursor->next = vectorinit();
-                charcursor=tokeninit();
-                tokcursor = tokcursor->next;
-                tokcursor->token = &charcursor;
+            if(tokenlist[i]=='\0'){
+                tokenvector = (char**)realloc(tokenvector, (tokencnt+1)*sizeof(char));
                 tokencnt++;
+                tokenvector[tokencnt]=NULL;
+            }else{
+                tokenvector = (char**)realloc(tokenvector, (tokencnt+1)*sizeof(char));
+                tokencnt++;
+                tokenvector[tokencnt]= (char*)malloc(sizeof(char));
+                temptoken = tokenvector[tokencnt];
             }
-            tokensize=0;
-
+            i++;
         }
-    }
-
-
-
-    charcursor= *head->token;
-    char c;
-    char* tmp=(char*)malloc(i*sizeof(char));
-    i=0;
-    while(charcursor->tokenchar!='\0'){  
-        c= charcursor->tokenchar;
-       // printf("%c",c);  
-        tmp[i]= charcursor->tokenchar;
-        charcursor= charcursor->next;
+        
+        temptoken = (char*)realloc(temptoken, (tokenlenght+1)*sizeof(char));
+        temptoken[tokenlenght]=tokenlist[i];
+        tokenlenght++;
         i++;
+
     }
 
+    i=0;
+
+    while(tokenvector[i]!=NULL){
+       printf("%s\n",tokenvector[i]);
+       i++;
+    }
     
-
-    printf("%s\n",tmp);
-
-    return tokenvector;
+    
 
 };
 
