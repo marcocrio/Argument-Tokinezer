@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include ".include/argtok.h"
+#include <string.h>
 
 
 void main (){
@@ -10,13 +11,14 @@ void main (){
     
 
     char* tokenlist;
-    char** tokenvector;
     //scanf reads the buffer until it finds a new line characte '\n'.
     //then memory is allocated for the buffer   
     scanf("%m[^\n]", &tokenlist);
 
+
     //token generation
-    tokenvector = argtok(tokenlist);
+    argtok(tokenlist);
+
 
     //Buffer deallocation to avoid leak.
     free(tokenlist);

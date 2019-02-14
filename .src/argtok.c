@@ -6,77 +6,73 @@
 char ** argtok(char * tokenlist){
     validation(tokenlist); //input validation
 
-    char** tokenvector=(char**)malloc(sizeof(char));
-    char* temptoken;
+    char** tokenvector;//allocate the head of token vector
+    char* temptoken; //temporal token to traverse token
     int tokenlenght=0,tokencnt=0,i=0;
 
-    tokenvector[tokencnt]= (char*)malloc(sizeof(char));
-    temptoken = tokenvector[tokencnt];
+
+    
+    //tokenvector[tokencnt]= (char*)malloc(sizeof(char));//ALLOCATES MEMORY FOR A TOKEN IN THE TOKEN VECTOR'S HEAD
+    //temptoken = tokenvector[tokencnt];//USES A TEMPORARY POINTER TO WORK WITH EACH TOKEN ARRAY
+    
+    while(tokenlist[i]!= '\0'){
+        if(tokenlist[i]==' ')tokencnt++;
+        i++;
+    }
+
+    tokenvector = (char**)malloc(tokencnt+2*(sizeof(char*)));
+
+    tokenvector[3]=tokenlist;
+
+    printf("%s",tokenvector[4]);
+/*
+    tokencnt=0;
+    temptoken= tokenvector[tokencnt];
+    i=0;
 
     while(tokenlist[i]!='\0'){
-        
-        if(tokenlist[i]==' ' || tokenlist[i]=='\0'){
-            temptoken = (char*)realloc(temptoken, (tokenlenght+1)*sizeof(char));
-            temptoken[tokenlenght]='\0';
-            tokenlenght=0;
-
-            if(tokenlist[i]=='\0'){
-                tokenvector = (char**)realloc(tokenvector, (tokencnt+1)*sizeof(char));
-                tokencnt++;
-                tokenvector[tokencnt]=NULL;
-            }else{
-                tokenvector = (char**)realloc(tokenvector, (tokencnt+1)*sizeof(char));
-                tokencnt++;
-                tokenvector[tokencnt]= (char*)malloc(sizeof(char));
-                temptoken = tokenvector[tokencnt];
-            }
-            i++;
-        }
-        
+        //REALLOCATES MEMORY AS NEEDED DEPENDING ON TOKENS LENGHT
         temptoken = (char*)realloc(temptoken, (tokenlenght+1)*sizeof(char));
+        tokenvector[tokencnt]= temptoken;
         temptoken[tokenlenght]=tokenlist[i];
         tokenlenght++;
         i++;
-
+        
+        if(tokenlist[i]==' '){
+            //printf("\n");
+            temptoken[i]='\0';
+            tokencnt++;
+            //printf("%s\n",temptoken);
+            temptoken= tokenvector[tokencnt];
+            i++;
+            tokenlenght=0;
+        }
     }
+    
+    temptoken[i-1]='\0';
+    tokenvector[tokencnt+1]=NULL;
+
+    temptoken = NULL;
 
     i=0;
 
     while(tokenvector[i]!=NULL){
        printf("%s\n",tokenvector[i]);
        i++;
-    }
+    };
     
-    
+    //deallocates tokens
+    while(tokencnt!=0){
+        free(tokenvector[tokencnt]);
+        tokenvector[tokencnt]=NULL;
+        tokencnt--;
+    };
+    */
+    //deallocates token vector
+    free(tokenvector);
+    tokenvector=NULL;
 
 };
-
-
-
-//Allocates a new Token Character link
-Tokenspll* tokeninit(){
-    Tokenspll* new = (Tokenspll* )malloc(sizeof(Tokenspll));
-    new->index=0;
-    new->next = NULL;
-    return new;
-};
-
-//Allocates new Token Vector link.
-Token* vectorinit(){
-    Token* new = (Token*)malloc(sizeof(Token));
-    new->tokensize=0;
-    new->index=0;
-    new->next=NULL;
-    return new;
-}
-
-
-void freemem(Token* t){
-    
-};
-
-
-
 
 
 
@@ -94,6 +90,10 @@ int validation(char* string){
     return 0;
 }
 
+
+ /*
+
+//THIS FUNCTION IS FOR TESTING, IGNORE
 
 char ** read(char * token){
 
@@ -115,3 +115,4 @@ char ** read(char * token){
     return NULL;
 
 }
+*/
