@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include ".include/argtok.h"
+#include <string.h>
 
 
 
@@ -38,9 +39,17 @@ int main(){
         tmp=(char*)realloc(tmp,(tokenlenght+1)*sizeof(char));
         tmp[tokenlenght]=tkn[i];
         tokenlenght++;
+
+        if(tkn[i]=' '){
+            tokencnt++;
+            tmp = tknv[tokencnt];
+            tokenlenght=0;
+        }
+
         i++;
+
     }
-    printf("%d \n",(int)sizeof(tmp));
+    printf("%d \n",(int)strlen(tmp)+1);
     //printf("\n");
    // printf("%s\n%d\n",tmp,tokencnt);
 
