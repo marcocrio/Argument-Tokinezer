@@ -8,8 +8,11 @@
 
 int main(){
 
-    char** tknv=NULL;
-    char* tkn=NULL,*tmp=NULL;
+
+    printf("hello");
+/*
+    char** tknv;
+    char* tkn,*tmp;
     int tokenlenght=0,tokencnt=0,i=0;   
 
     printf("$ ");
@@ -33,6 +36,10 @@ int main(){
     tokencnt=0;
     i=0;
 
+
+
+
+
     
     while(tkn[i]!='\0'){   
        
@@ -41,8 +48,12 @@ int main(){
         tokenlenght++;
         i++;
     }
-    printf("%d \n",(int)strlen(tmp)+1);
-    //printf("\n");
-   // printf("%s\n%d\n",tmp,tokencnt);
 
+    //printf("%d \n",(int)strlen(tmp)+1);
+    //printf("\n");
+    //printf("%s\n%d\n",tmp,tokencnt);
+
+
+*/
+    return 0;
 };
