@@ -8,8 +8,8 @@
 
 int main(){
 
-    char** tknv;
-    char* tkn,*tmp;
+    char** tknv=NULL;
+    char* tkn=NULL,*tmp=NULL;
     int tokenlenght=0,tokencnt=0,i=0;   
 
     printf("$ ");
@@ -40,8 +40,6 @@ int main(){
         tmp[tokenlenght]=tkn[i];
         tokenlenght++;
         i++;
-        
-
     }
     printf("%d \n",(int)strlen(tmp)+1);
     //printf("\n");
