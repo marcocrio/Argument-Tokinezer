@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include ".include/argtok.h"
-#include <string.h>
 
 
 void main (){
@@ -20,14 +19,18 @@ void main (){
     //token generation returns the token vector
     tokenvector=argtok(tokenlist);
 
-    printf("\nYour tokens:");
     while(tokenvector[i]){
-        printf(" | %s",tokenvector[i]);
-        free(tokenvector[i]);//Deallocates tokens
+        printf("%s\n",tokenvector[i]);
         i++;
     }
 
-    //Deallocates token vector
+    while(tokenvector[i]){
+        free(tokenvector[i]);//Deallocates tokens
+        i++;
+    }
+    
+
+    //Deallocates token vectors
     free(tokenvector);
     //Buffer deallocation to avoid leak.
     free(tokenlist);
