@@ -7,22 +7,30 @@
 void main (){
     system("clear");
 
-    printf("Provide a list of tokens separated by an space:\n");
+    printf("$ ");
     
-
+    char ** tokenvector;
     char* tokenlist;
+    int i =0;
     //scanf reads the buffer until it finds a new line characte '\n'.
     //then memory is allocated for the buffer   
     scanf("%m[^\n]", &tokenlist);
 
 
-    //token generation
-    argtok(tokenlist);
+    //token generation returns the token vector
+    tokenvector=argtok(tokenlist);
 
+    printf("\nYour tokens:");
+    while(tokenvector[i]){
+        printf(" | %s",tokenvector[i]);
+        free(tokenvector[i]);//Deallocates tokens
+        i++;
+    }
 
+    //Deallocates token vector
+    free(tokenvector);
     //Buffer deallocation to avoid leak.
     free(tokenlist);
-
 
 
     printf("\n");    

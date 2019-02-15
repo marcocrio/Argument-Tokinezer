@@ -7,13 +7,12 @@
 
 
 int main(){
+    system("clear");
 
 
-    printf("hello");
-/*
     char** tknv;
     char* tkn,*tmp;
-    int tokenlenght=0,tokencnt=0,i=0;   
+    int tokenlenght=0,tokencnt=0,i=0,cursor=0,j=0;   
 
     printf("$ ");
     scanf("%m[^\n]",&tkn);
@@ -22,38 +21,37 @@ int main(){
         if(tkn[i]==' ')tokencnt++;
         i++;
     }
-    i=0;
-    tokencnt++;
+    tknv=(char**)malloc((tokencnt+1)*sizeof(char*));
 
-    tknv=(char**)malloc(tokencnt*sizeof(char*));
-    tmp= (char*)malloc(sizeof(char));
-
-    //tmp[0]=tkn[0];
-
-    //tmp=(char*)realloc(tmp,5*sizeof(char));
-
-    //tmp[1]=tkn[1];
     tokencnt=0;
     i=0;
+    while(tkn[i]!='\0'){
+        
+        if(tkn[i]==' ' || tkn[i+1]=='\0'){
+            if(tkn[i+1]=='\0')i++;
+            tokenlenght= ((i+(i+2))/2)-cursor;
+            tknv[tokencnt]=(char*)malloc( (tokenlenght)*sizeof(char));
+            for(j=0; j<tokenlenght;j++){
+                tknv[tokencnt][j]=tkn[cursor];
+                cursor++;
+            }
+            printf("%s\n",tknv[tokencnt]);
+            tokencnt++;
+            tokenlenght=0;
+            
+        };
 
+        i++;
 
+    };
 
+    tknv[tokencnt]=NULL;
+    i=0;
 
-
-    
-    while(tkn[i]!='\0'){   
-       
-        tmp=(char*)realloc(tmp,(tokenlenght+1)*sizeof(char));
-        tmp[tokenlenght]=tkn[i];
-        tokenlenght++;
+    while(tknv[i]){
+        tknv[i];
         i++;
     }
 
-    //printf("%d \n",(int)strlen(tmp)+1);
-    //printf("\n");
-    //printf("%s\n%d\n",tmp,tokencnt);
-
-
-*/
     return 0;
 };

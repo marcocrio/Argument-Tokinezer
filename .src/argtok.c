@@ -3,77 +3,47 @@
 #include "../.include/argtok.h"
 
 
-char ** argtok(char * tokenlist){
-    validation(tokenlist); //input validation
+char ** argtok(char * tkn){
+    validation(tkn); //input validation
 
-    char** tokenvector;//allocate the head of token vector
-    char* temptoken; //temporal token to traverse token
-    int tokenlenght=0,tokencnt=0,i=0;
+    char** tknv;
+    int tokenlenght=0,tokencnt=0,i=0,cursor=0,j=0;   
 
-
-    
-    //tokenvector[tokencnt]= (char*)malloc(sizeof(char));//ALLOCATES MEMORY FOR A TOKEN IN THE TOKEN VECTOR'S HEAD
-    //temptoken = tokenvector[tokencnt];//USES A TEMPORARY POINTER TO WORK WITH EACH TOKEN ARRAY
-    
-    while(tokenlist[i]!= '\0'){
-        if(tokenlist[i]==' ')tokencnt++;
+    //Traverss and gets the number of tokens
+    while(tkn[i]!= '\0'){
+        if(tkn[i]==' ')tokencnt++;
         i++;
     }
+    tknv=(char**)malloc((tokencnt+1)*sizeof(char*));//allocates memory for tokens
 
-    tokenvector = (char**)malloc(tokencnt+2*(sizeof(char*)));
-
-    tokenvector[3]=tokenlist;
-
-    printf("%s",tokenvector[4]);
-/*
     tokencnt=0;
-    temptoken= tokenvector[tokencnt];
     i=0;
-
-    while(tokenlist[i]!='\0'){
-        //REALLOCATES MEMORY AS NEEDED DEPENDING ON TOKENS LENGHT
-        temptoken = (char*)realloc(temptoken, (tokenlenght+1)*sizeof(char));
-        tokenvector[tokencnt]= temptoken;
-        temptoken[tokenlenght]=tokenlist[i];
-        tokenlenght++;
-        i++;
+    while(tkn[i]!='\0'){
         
-        if(tokenlist[i]==' '){
-            //printf("\n");
-            temptoken[i]='\0';
+        if(tkn[i]==' ' || tkn[i+1]=='\0'){
+            if(tkn[i+1]=='\0')i++;
+            tokenlenght= ((i+(i+2))/2)-cursor;// gets the lenght of token
+            tknv[tokencnt]=(char*)malloc( (tokenlenght)*sizeof(char));//allocates memory for token
+            //populates token
+            for(j=0; j<tokenlenght;j++){
+                tknv[tokencnt][j]=tkn[cursor];
+                cursor++;
+            }
+            //printf("%s\n",tknv[tokencnt]);
             tokencnt++;
-            //printf("%s\n",temptoken);
-            temptoken= tokenvector[tokencnt];
-            i++;
             tokenlenght=0;
-        }
-    }
-    
-    temptoken[i-1]='\0';
-    tokenvector[tokencnt+1]=NULL;
+            
+        };
 
-    temptoken = NULL;
+        i++;
 
-    i=0;
-
-    while(tokenvector[i]!=NULL){
-       printf("%s\n",tokenvector[i]);
-       i++;
     };
-    
-    //deallocates tokens
-    while(tokencnt!=0){
-        free(tokenvector[tokencnt]);
-        tokenvector[tokencnt]=NULL;
-        tokencnt--;
-    };
-    */
-    //deallocates token vector
-    free(tokenvector);
-    tokenvector=NULL;
+
+    tknv[tokencnt]=NULL;//finalizes token vector with a null value
+
+    return tknv;
 
 };
-
 
 
 //validates user input
